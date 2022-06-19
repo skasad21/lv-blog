@@ -1,0 +1,16 @@
+Make role then permission the permission_role table then user table.
+
+1. php artisan migrate:install
+2. composer require laravel/breeze --dev
+3. npm install && npm run dev
+4. php artisan make:model Role -m
+5. php artisan make:model Permission -m
+6. php artisan make:migration create_permission_role_table
+7. php artisan migrate
+8. php artisan make:seeder AdminSeeder
+9. php artisan db:seed
+10. php artisan make:controller Admin/AdminController
+11. npm run watch
+12. npm install autoprefixer@10.4.5 --save-exact (to fix the error)
+13. php artisan make:middleware AdminMiddleware
+14. php artisan make:middleware HasRoleMiddleware
