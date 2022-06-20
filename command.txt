@@ -18,3 +18,4 @@ Make role then permission the permission_role table then user table.
 16. php artisan make:controller Admin/PermissionController
 17. php artisan route:list
 18. php artisan tinker
+19. php artisan make:controller Admin/UserController

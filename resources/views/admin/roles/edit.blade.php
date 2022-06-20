@@ -29,14 +29,17 @@
             </form>
         </div>
     </div>
+
+
+    {{-- to give permission to user  --}}
     <div class="mt-12 max-w-6xl mx-auto bg-slate-50 p-4 rounded">
         <div class="flex m-2 p-2">
             <h2>Permissions</h2>
-            <div class="max-w-md mx-auto">
+            {{-- <div class="max-w-md mx-auto">
                 @foreach ($role->permissions as $rp)
                     <span class="m-2 p-2 bg-indigo-300 rounded-md">{{ $rp->name }}</span>
                 @endforeach
-            </div>
+            </div> --}}
         </div>
         <div class="max-w-md mx-auto bg-gray-100 p-6 mt-12 rounded">
             <form class="space-y-5" method="POST" action="{{ route('admin.roles.permissions', $role->id) }}">
