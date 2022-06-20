@@ -14,3 +14,7 @@ Make role then permission the permission_role table then user table.
 12. npm install autoprefixer@10.4.5 --save-exact (to fix the error)
 13. php artisan make:middleware AdminMiddleware
 14. php artisan make:middleware HasRoleMiddleware
+15. php artisan make:controller Admin/RoleController
+16. php artisan make:controller Admin/PermissionController
+17. php artisan route:list
+18. php artisan tinker
