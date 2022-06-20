@@ -1,6 +1,7 @@
 <x-admin-layout>
     <div class="mt-12 max-w-6xl mx-auto">
         <div class="relative overflow-x-auto shadow-md bg-gray-200 sm:rounded-lg">
+            <h2 class="text-xl font-normal leading-normal mt-0 mb-2 text-violet-800">User List</h2>
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
