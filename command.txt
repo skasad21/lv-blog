@@ -20,3 +20,9 @@ Make role then permission the permission_role table then user table.
 18. php artisan tinker
 19. php artisan make:controller Admin/UserController
 20. php artisan make:request UserUpdateRequest
+21. php artisan make:model Post -m
+22. php artisan make:controller PostController
+23. php artisan make:factory PostFactory
+24. php artisan db:seed
+25. php artisan make:policy PostPolicy --model=Post
+26. php artisan make:middleware CheckUserPostsNumber

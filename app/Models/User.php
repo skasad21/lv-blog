@@ -18,6 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    //protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
@@ -45,7 +46,8 @@ class User extends Authenticatable
     ];
 
     // new methods for role
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
 
@@ -56,8 +58,12 @@ class User extends Authenticatable
 
     public function hasRole($name): bool
     {
-        return $this->role()->where('name',$name)->exists();
+        return $this->role()->where('name', $name)->exists();
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 
 }

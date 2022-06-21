@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
@@ -25,6 +26,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::resource('/posts', PostController::class);
+
+
 // Route::get('/dashboard', function () {
 //     return view('admin.index');
 // })->middleware(['auth'])->name('dashboard');
@@ -39,9 +43,6 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
 });
 
 
-// User Group
-// Route::middleware(['auth','role:user'])->group(function(){
-//     Route::get('/users',[AdminController::class,'index'])->name('admin.index');
-// });
+
 
 require __DIR__.'/auth.php';

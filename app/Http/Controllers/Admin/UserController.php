@@ -36,4 +36,7 @@ class UserController extends Controller
         $user->delete();
         return to_route('admin.users.index')->with('message', 'User deleted.');
     }
+
+
+
 }

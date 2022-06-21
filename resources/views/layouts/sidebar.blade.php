@@ -31,17 +31,35 @@
 
             <span class="mx-3">Dashboard</span>
         </a>
-        <x-sidebar-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.index')">
-            {{ __('Roles') }}
-        </x-sidebar-link>
 
-        <x-sidebar-link :href="route('admin.permissions.index')" :active="request()->routeIs('admin.permissions.index')">
-            {{ __('Permissions') }}
-        </x-sidebar-link>
+        {{-- {{ $role = Auth::user()->role_id; }} --}}
+        @if (Auth::user()->hasRole('admin'))
+            <x-sidebar-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.index')">
+                {{ __('Roles') }}
+            </x-sidebar-link>
 
-        <x-sidebar-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
-            {{ __('Users') }}
+            <x-sidebar-link :href="route('admin.permissions.index')" :active="request()->routeIs('admin.permissions.index')">
+                {{ __('Permissions') }}
+            </x-sidebar-link>
+
+            <x-sidebar-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
+                {{ __('Users') }}
+            </x-sidebar-link>
+
+            <x-sidebar-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
+                {{ __('Posts') }}
+            </x-sidebar-link>
+        @else
+        <x-sidebar-link :href="route('posts.index')" :active="request()->routeIs('posts.index')" target="_blank">
+            {{ __('Posts') }}
         </x-sidebar-link>
+        @endif
+
+
+
+        {{-- post --}}
+
+
 
     </nav>
 </div>
