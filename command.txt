@@ -26,3 +26,6 @@ Make role then permission the permission_role table then user table.
 24. php artisan db:seed
 25. php artisan make:policy PostPolicy --model=Post
 26. php artisan make:middleware CheckUserPostsNumber
+27. composer require maatwebsite/excel
+28. php artisan make:import UsersImport --model=User
+

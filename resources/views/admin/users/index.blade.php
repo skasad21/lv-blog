@@ -1,9 +1,20 @@
 <x-admin-layout>
+
+
+
+
     <div class="mt-12 max-w-6xl mx-auto">
-        <div class="flex justify-end m-2 p-2">
+        <div class="flex justify-between m-2 p-2">
+
+            <a href="{{ route('admin.users.import') }}" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-600 rounded">
+                Upload Excel File</a>
+
             <a href="{{ route('admin.users.create') }}" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-600 rounded">
                 Add New User</a>
+
         </div>
+
+
         <div class="relative overflow-x-auto shadow-md bg-gray-200 sm:rounded-lg">
             <h2 class="text-xl font-normal leading-normal mt-0 mb-2 text-violet-800">User List</h2>
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -59,4 +70,5 @@
         </div>
 
     </div>
+
 </x-admin-layout>

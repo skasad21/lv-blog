@@ -40,6 +40,9 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::resource('/roles', RoleController::class);
     Route::resource('/permissions', PermissionController::class);
     Route::resource('/users', UserController::class);
+    Route::get('users/import', [UserController::class,'show'])->name('users.import');
+    Route::post('/users/import', [UserController::class,'exstore'])->name('users.exstore');
+
 });
 
 
