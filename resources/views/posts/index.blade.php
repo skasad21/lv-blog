@@ -2,16 +2,23 @@
     {{-- <x-app-layout> --}}
     <div class="mt-12 max-w-6xl mx-auto">
         @can('create', App\Models\Post::class)
-            {{-- @if ($count < 1) --}}
+
+            @if ($roleID == 1)
                 <div class="flex justify-end m-2 p-2">
                     <a href="{{ route('posts.create') }}" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-600 rounded">
                         New Post</a>
                 </div>
-            {{-- @endif --}}
+            @endif
 
-            {{-- <p class="joined-text">Today's Posts: {{ App\Models\Post::where('user_id', Auth::id())->count() }}</p> --}}
-            {{-- <p class="joined-text">Today's Posts: {{ $count }}</p> --}}
-            {{-- $posts = User::find(user_id)->posts; --}}
+            @if ($postCount < 1 && $roleID == 3)
+                <div class="flex justify-end m-2 p-2">
+                    <a href="{{ route('posts.create') }}" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-600 rounded">
+                        New Post</a>
+                </div>
+            @endif
+
+            <p class="joined-text">Today's Posts: {{ $postCount }}</p>
+            <p class="joined-text">User Role: {{ $roleID }}</p>
         @endcan
         <div class="relative overflow-x-auto shadow-md bg-gray-200 sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

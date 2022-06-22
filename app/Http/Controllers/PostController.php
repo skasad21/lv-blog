@@ -16,21 +16,19 @@ class PostController extends Controller
 {
     public function index()
     {
-
-        $role = new Role();
-        $result = $role->hasPermission('admin');
-
-        if ($result == true) {
+        $roleID = Auth::user()->role_id;
+        $postCount = 0;
+        if ($roleID == 1) {
             $posts = Post::all();
-        } else {
-            $posts = Post::whereUserId(Auth::id())->get();
+            $postCount = Post::all()->count();
         }
-        //whereDate('created_at', '=', Carbon::today()->toDateString());
+        if($roleID == 3){
+            $posts = Post::whereUserId(Auth::id())->get();
+            $postCount = Post::where('user_id', Auth::id())->whereDate('created_at', '=', Carbon::today()->toDateString())->count();
+        }
 
+        return view('posts.index', compact('posts','postCount','roleID'));
 
-
-
-        return view('posts.index', compact('posts'));
     }
 
     public function getPostByUserLoginID()
