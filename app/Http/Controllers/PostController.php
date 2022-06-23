@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostUpdateRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 
 class PostController extends Controller
@@ -29,6 +31,24 @@ class PostController extends Controller
 
         return view('posts.index', compact('posts','postCount','roleID'));
 
+    }
+
+    public function edit(Post $post)
+    {
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(PostUpdateRequest $request, Post $post)
+    {
+        $post->update($request->validated());
+
+        return to_route('posts.index')->with('message', 'Post updated.');
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return to_route('posts.index')->with('message', 'Post deleted.');
     }
 
     public function getPostByUserLoginID()

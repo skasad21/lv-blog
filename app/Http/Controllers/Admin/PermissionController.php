@@ -35,7 +35,9 @@ class PermissionController extends Controller
 
     public function update(Request $request, Permission $permission)
     {
-        $validated = $request->validate(['name' => ['required', 'min:3']]);
+        $validated = $request->validate([
+            'name' => ['required', 'min:3']
+        ]);
         $permission->update($validated);
 
         return to_route('admin.permissions.index')->with('message', 'The Permission Updated.');

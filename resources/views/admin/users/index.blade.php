@@ -35,6 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     @foreach ($users as $user)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
@@ -67,7 +68,11 @@
 
                 </tbody>
             </table>
+
         </div>
+
+
+
 
     </div>
 

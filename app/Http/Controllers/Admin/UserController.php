@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\UserUpdateRequest;
+use JetBrains\PhpStorm\Immutable;
 
 class UserController extends Controller
 {
     public function index()
     {
         $users = User::all()->except(Auth::id());
+
 
         return view('admin.users.index', compact('users'));
     }
@@ -28,7 +30,8 @@ class UserController extends Controller
         return view('admin.users.create', compact('roles'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $validated = $request->validate([
             'role_id' => 'required',
@@ -70,20 +73,33 @@ class UserController extends Controller
         return to_route('admin.users.index')->with('message', 'User deleted.');
     }
 
-    public function show(){
+    public function show()
+    {
         return view('admin.users.import');
     }
 
-    public function exstore(Request $request){
+    public function exstore(Request $request)
+    {
 
-        $file = $request->file('file');
-        Excel::import(new UsersImport,$file);
+        $file = $request->file('file')->store('ImportedExcelFile');
 
+        //For normal import
+        //Excel::import(new UsersImport,$file);
+
+        //Access Error
+        $import = new UsersImport;
+        $import->import($file);
+        //$import->queue($file);
+
+        //dd($import->errors());
+        //dd($import->failures());
+
+        if ($import->failures()->isNotEmpty()) {
+            return back()->withFailures($import->failures());
+        }
+
+        // Using Importable
+        //(new UsersImport)->import($file);
         return to_route('admin.users.index')->with('message', 'Excel File Import SuccessFully');
-        //return back()->withStatus('Excel File Import SuccessFully');
     }
-
-
-
-
 }
