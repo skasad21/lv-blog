@@ -14,7 +14,7 @@
 
                 <div class="form-group">
                     <label for="name" class="text-xl">Upload File</label>
-                    <input id="name" type="file" name="file" />
+                    <input id="fileUpload" type="file" name="file" />
                 </div>
                 <button type="submit"
                     class="w-full py-3 mt-10 bg-indigo-400 hover:bg-indigo-600 rounded-md
@@ -33,7 +33,7 @@
 
                 <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
                     @foreach ($errors->all() as $error)
-                        <p>{{ $error }}</p>
+                        <p>You need to upload the file</p>
                     @endforeach
                 </div>
             </div>

@@ -80,6 +80,31 @@ class UserController extends Controller
 
     public function exstore(Request $request)
     {
+        $request->validate([
+            'file' => ['required']
+           ]);
+
+        $file = $request->file('file')->store('ImportedExcelFile');
+
+        //For normal import
+        //Excel::import(new UsersImport,$file);
+
+        //Access Error
+        $import = new UsersImport;
+        $import->import($file);
+        //$import->queue($file);
+
+        //dd($import->errors());
+        //dd($import->failures());
+
+        if ($import->failures()->isNotEmpty()) {
+            return back()->withFailures($import->failures());
+        }
+
+        // Using Importable
+        //(new UsersImport)->import($file);
+        return to_route('admin.users.index')->with('message', 'Excel File Import SuccessFully');
+
 
         $file = $request->file('file')->store('ImportedExcelFile');
 
