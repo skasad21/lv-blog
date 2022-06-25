@@ -71,6 +71,10 @@
 
                 </tbody>
             </table>
+            <div class="container mx-auto">
+            {{ $posts->links() }}
+            </div>
+
         </div>
 
     </div>

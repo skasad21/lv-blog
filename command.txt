@@ -29,3 +29,5 @@ Make role then permission the permission_role table then user table.
 27. composer require maatwebsite/excel
 28. php artisan make:import UsersImport --model=User
 
+
+

@@ -21,11 +21,14 @@ class PostController extends Controller
         $roleID = Auth::user()->role_id;
         $postCount = 0;
         if ($roleID == 1) {
-            $posts = Post::all();
+            $posts = Post::paginate(5);
+
+            //$posts = Post::paginate(8);
             $postCount = Post::all()->count();
         }
         if($roleID == 3){
-            $posts = Post::whereUserId(Auth::id())->get();
+           // $posts = Post::whereUserId(Auth::id())->get()->paginate(5);
+            $posts = Post::where('user_id',Auth::id())->paginate(5);
             $postCount = Post::where('user_id', Auth::id())->whereDate('created_at', '=', Carbon::today()->toDateString())->count();
         }
 
