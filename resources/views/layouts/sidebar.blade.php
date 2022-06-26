@@ -1,4 +1,4 @@
-<div x-cloak :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
+<div x-cloak :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = flase"
     class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
 
 <div x-cloak :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
@@ -32,6 +32,7 @@
 
                 <span class="mx-3">Dashboard</span>
             </a>
+
             <x-sidebar-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.index')">
                 {{ __('Roles') }}
             </x-sidebar-link>

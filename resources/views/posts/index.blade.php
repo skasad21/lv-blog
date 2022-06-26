@@ -50,6 +50,8 @@
 
                             <td class="px-6 py-4 text-right">
                                 <div class="flex space-x-2">
+                                    <a href="{{ route('posts.show', $post->id) }}"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">show</a>
                                     @can('update', $post)
                                         <a href="{{ route('posts.edit', $post->id) }}"
                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>

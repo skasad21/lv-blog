@@ -1,6 +1,7 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,18 +30,20 @@
             </div>
             <div class="col-span-2 text-right">
                 @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-white dark:text-gray-500 underline">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-white dark:text-gray-500">Log in</a>
+                    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                        @auth
+                            <a href="{{ url('/dashboard') }}"
+                                class="text-sm text-white dark:text-gray-500 underline">Dashboard</a>
+                        @else
+                            <a href="{{ route('login') }}" class="text-sm text-white dark:text-gray-500">Log in</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-white-700 dark:text-gray-500">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}"
+                                    class="ml-4 text-sm text-white-700 dark:text-gray-500">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -49,35 +52,47 @@
         <div class="grid grid-cols-4 gap-4">
             <div class="col-span-3">
 
-                <div class="mb-10">
-                    <img src="https://picsum.photos/1000/420" alt="Post header image" class="rounded-lg my-4"/>
+                @foreach ($posts as $post)
+                    <div class="mb-10">
+                        <img src="/uploads/{{ $post->image }}" alt="Post header image" class="rounded-lg my-4" />
+                        <h1>{{ $post->title }}</h1>
+                        <p>{{Str::limit($post->body, 300)}}</p>
+                    </div>
+                @endforeach
+
+
+
+                {{ $posts->withQueryString()->links('vendor.pagination.tailwind') }}
+
+                {{-- <div class="mb-10">
+                    <img src="https://picsum.photos/1000/420" alt="Post header image" class="rounded-lg my-4" />
                     <h1 class="text-3xl">This is the title of my first post</h1>
 
                     <p>This is the description bnablab alba lbal ablabla blab al.</p>
                 </div>
 
                 <div class="my-10">
-                    <img src="https://picsum.photos/1000/420?sjdj" alt="Post header image" class="rounded-lg my-4"/>
+                    <img src="https://picsum.photos/1000/420?sjdj" alt="Post header image" class="rounded-lg my-4" />
                     <h1 class="text-3xl">This is the title of my second post</h1>
 
                     <p>This is the description bnablab alba lbal ablabla blab al.</p>
-                </div>
+                </div> --}}
 
             </div>
 
             <div>
-                <h2 class="text-gray-400 text-xl">Categories</h2>
+                <h2 class="text-gray-400 text-xl">Latest Post</h2>
 
                 <ul>
-                    <li><a href="#">Linux</a></li>
-                    <li><a href="#">PHP</a></li>
-                    <li><a href="#">Development</a></li>
-                    <li><a href="#">Devops</a></li>
-                    <li><a href="#">Career</a></li>
+                    @foreach ($last_posts as $last_post)
+                    <li><a href="#">{{ $last_post->title }}</a></li>
+                    @endforeach
+
                 </ul>
             </div>
         </div>
     </div>
 
 </body>
+
 </html>

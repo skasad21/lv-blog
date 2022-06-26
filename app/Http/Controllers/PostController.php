@@ -26,14 +26,18 @@ class PostController extends Controller
             //$posts = Post::paginate(8);
             $postCount = Post::all()->count();
         }
-        if($roleID == 3){
-           // $posts = Post::whereUserId(Auth::id())->get()->paginate(5);
-            $posts = Post::where('user_id',Auth::id())->paginate(5);
+        if ($roleID == 3) {
+            // $posts = Post::whereUserId(Auth::id())->get()->paginate(5);
+            $posts = Post::where('user_id', Auth::id())->paginate(5);
             $postCount = Post::where('user_id', Auth::id())->whereDate('created_at', '=', Carbon::today()->toDateString())->count();
         }
 
-        return view('posts.index', compact('posts','postCount','roleID'));
+        return view('posts.index', compact('posts', 'postCount', 'roleID'));
+    }
 
+    public function show($id){
+        $post =  Post::findOrFail($id);
+        return view('posts.show',compact('post')); // ['contact' => $contact]
     }
 
     public function edit(Post $post)
@@ -69,16 +73,37 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create', Post::class);
-        $validated = $request->validate([
-            'title' => 'required',
-            'image' => 'nullable',
-            'body' => 'required',
+        // $this->authorize('create', Post::class);
+        // $validated = $request->validate([
+        //     'title' => 'required',
+        //     'image' => 'nullable',
+        //     'body' => 'required',
+        //     'user_id' => 'required',
+        // ]);
+        // Post::create($validated);
+
+        // return to_route('posts.index')->with('message', 'Post Recorded');
+
+        $request->validate([
+            'title' => 'required|min:3|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'body' => 'required|min:10|max:4096',
             'user_id' => 'required',
         ]);
-        Post::create($validated);
 
-        return to_route('posts.index');
+        $input = $request->all();
+
+        if ($image = $request->file('image')) {
+            $imageDestinationPath = 'uploads/';
+            $postImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($imageDestinationPath, $postImage);
+            $input['image'] = "$postImage";
+        }
+        Post::create($input);
+
+        return redirect()->route('posts.index')->with('message','Post created successfully.');
+
+
     }
 
     public function todaysCount(): int

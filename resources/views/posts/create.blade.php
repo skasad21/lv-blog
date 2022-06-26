@@ -7,7 +7,7 @@
             </div>
         @endcan
         <div class="max-w-md mx-auto p-4">
-            <form class="space-y-5" method="POST" action="{{ route('posts.store') }}">
+            <form class="space-y-5" method="POST" enctype="multipart/form-data" action="{{ route('posts.store') }}">
                 @csrf
                 <div>
                     <label for="title" class="text-xl">Title</label>
@@ -23,7 +23,7 @@
                 <div>
                     <label for="body" class="text-xl">Body</label>
                     <input id="body" type="text" name="body"
-                        class="block w-full py-3 px-3 mt-2
+                        class="block w-full py-6 px-6 mt-2
                             text-gray-800 appearance-none
                             border-2 border-gray-100
                             focus:text-gray-500 focus:outline-none focus:border-gray-200 rounded-md" />
@@ -32,7 +32,20 @@
                     @enderror
                 </div>
 
-                <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
+
+                <div>
+                    <label for="file" class="text-xl">Image</label>
+                    <input id="image" type="file" name="image"
+                        class="block w-full py-3 px-3 mt-2
+                            text-gray-800 appearance-none
+                            border-2 border-gray-100
+                            focus:text-gray-500 focus:outline-none focus:border-gray-200 rounded-md" />
+                    @error('image')
+                        <span class="text-sm text-red-400">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
 
                 <button type="submit"
                     class="w-full py-3 mt-10 bg-indigo-400 hover:bg-indigo-600 rounded-md
