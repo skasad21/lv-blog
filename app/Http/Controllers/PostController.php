@@ -101,7 +101,7 @@ class PostController extends Controller
         }
         Post::create($input);
 
-        return redirect()->route('posts.index')->with('message','Post created successfully.');
+        return to_route('posts.index')->with('message','Post created successfully.');
 
 
     }

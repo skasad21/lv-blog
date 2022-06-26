@@ -26,8 +26,8 @@
     <div class="container text-white mx-auto mt-6">
         <div class="grid grid-cols-3 gap-4">
             <div>
-               <a href="{{ url('/') }}"><h1 class="text-4xl">Blog</h1></a>
-            </div>
+                <a href="{{ url('/') }}"><h1 class="text-4xl">Blog</h1></a>
+             </div>
             <div class="col-span-2 text-right">
                 @if (Route::has('login'))
                     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -52,23 +52,19 @@
         <div class="grid grid-cols-4 gap-4">
             <div class="col-span-3">
 
-                @foreach ($posts as $post)
+
                     <div class="mb-10">
                         <img src="/uploads/{{ $post->image }}" alt="Post header image" class="rounded-lg my-4" />
                         <h1>{{ $post->title }}</h1>
                         <p class="text-justify">
-                            {{ Str::limit($post->body, 300) }}
-                            @if (strlen(strip_tags($post->body)) > 300)
-                                <a href="{{ route('show', $post) }}" class="btn btn-info btn-sm font-bold text-blue-600">Read More</a>
-                            @endif
-
+                            {{$post->body}}
                         </p>
                     </div>
-                @endforeach
 
 
 
-                {{ $posts->withQueryString()->links('vendor.pagination.tailwind') }}
+
+
 
                 {{-- <div class="mb-10">
                     <img src="https://picsum.photos/1000/420" alt="Post header image" class="rounded-lg my-4" />
@@ -89,7 +85,7 @@
             <div>
 
                 <img src="https://picsum.photos/100" class="rounded-full mx-auto p-4" alt="avatar" />
-                <p class="text-gray-700 text-xl mb-10">Hi, I'm a demo Laravel application built with Tailwind CSS, </p>
+                <p class="text-gray-700 text-xl mb-10">Hi, I'm a demo Laravel Blog application built with Tailwind CSS</p>
 
 
                 <h2 class="text-gray-400 text-xl">Latest Post</h2>

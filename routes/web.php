@@ -24,6 +24,7 @@ use App\Http\Controllers\IndexController;
 // });
 
 Route::get('/', [IndexController::class,'index']);
+Route::get('/post/{post}', [IndexController::class,'show'])->name('show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

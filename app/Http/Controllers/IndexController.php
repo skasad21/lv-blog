@@ -19,4 +19,10 @@ class IndexController extends Controller
 
         return view('index', compact('posts','last_posts'));
     }
+
+    public function show($post){
+        $post =  Post::findOrFail($post);
+        $last_posts = Post::limit(4)->orderBy("id","desc")->get();
+        return view('show',compact('post','last_posts')); // ['contact' => $contact]
+    }
 }
