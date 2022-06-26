@@ -15,8 +15,6 @@ class IndexController extends Controller
 
         $last_posts = Post::limit(4)->orderBy("id","desc")->get();
         //$last_posts = DB::select('select * from posts ORDER BY id DESC LIMIT 3');
-
-
         return view('index', compact('posts','last_posts'));
     }
 

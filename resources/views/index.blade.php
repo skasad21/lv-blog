@@ -68,7 +68,7 @@
 
 
 
-                {{ $posts->withQueryString()->links('vendor.pagination.tailwind') }}
+                {{ $posts->withQueryString()->links() }}
 
                 {{-- <div class="mb-10">
                     <img src="https://picsum.photos/1000/420" alt="Post header image" class="rounded-lg my-4" />
@@ -96,8 +96,8 @@
 
                 <ul>
                     @foreach ($last_posts as $last_post)
-                        <li class="py-2"><a class="px-1 py-2 bg-purple-300"
-                                href="#">{{ $last_post->title }}</a></li>
+                        <li class="py-2"><a class="px-1 py-2 bg-pink-400"
+                                href="{{ route('show', $post) }}">{{ $last_post->title }}</a></li>
                     @endforeach
 
                 </ul>
