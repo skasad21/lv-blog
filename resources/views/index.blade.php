@@ -9,6 +9,8 @@
     <title>My DEV Blog</title>
     <meta name="description" content="My DEV Blog">
     <meta name="author" content="Sourcegraph">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon/favicon.ico') }}">
+
 
     <meta property="og:title" content="A headless blog in Laravel">
     <meta property="og:type" content="website">

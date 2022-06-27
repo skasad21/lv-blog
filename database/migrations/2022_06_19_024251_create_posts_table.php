@@ -18,9 +18,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('image');
             $table->text('body');
-            //$table->integer('user_id')->unsigned();
+            //$table->integer('category_id');
+            //$table->integer('category_id')->constrained('categories')->onDelete('cascade');
             //$table->foreign('user_id')->references('id')->on('users');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

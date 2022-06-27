@@ -45,6 +45,10 @@
                 {{ __('Users') }}
             </x-sidebar-link>
 
+            <x-sidebar-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
+                {{ __('Categories') }}
+            </x-sidebar-link>
+
             <x-sidebar-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
                 {{ __('Posts') }}
             </x-sidebar-link>
