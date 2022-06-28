@@ -33,9 +33,9 @@ use App\Http\Controllers\PostController;
                         <th scope="col" class="px-6 py-3">
                             Title
                         </th>
-                        {{-- <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3">
                             Category
-                        </th> --}}
+                        </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
                         </th>
@@ -53,13 +53,15 @@ use App\Http\Controllers\PostController;
                                 class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                 {{ $post->title }}
                             </th>
-                            {{-- <th scope="row"
+                            <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                 @php
                                     $posts_controller = new PostController();
-                                    echo $posts_controller->getCategoryName($post->id);
+
+                                    echo $posts_controller->getCategoryName($post->category_id);
+
                                 @endphp
-                            </th> --}}
+                            </th>
 
                             <td class="px-6 py-4 text-right">
 

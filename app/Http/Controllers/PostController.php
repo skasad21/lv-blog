@@ -35,28 +35,51 @@ class PostController extends Controller
         return view('posts.index', compact('posts', 'postCount', 'roleID'));
     }
 
-    public function getCategoryName($id): string{
-        $categories = DB::select('SELECT name FROM categories where categories.id = '.$id.'');
-        //$categories = json_decode(json_encode($categories), true);
-        $return = $categories['0']['name'];
-        $return = implode(" ",$return);
-        dd($return);
-        return $return;
+    public function getCategoryName($id): string
+    {
+        $categories = DB::select('SELECT name FROM categories where categories.id = ' . $id . '');
+        $categories = json_decode(json_encode($categories), true);
+        if (!empty($categories['0']['name'])) {
+            $categories = $categories['0']['name'];
+        } else {
+            $categories = "";
+        }
+        return $categories;
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $post =  Post::findOrFail($id);
-        return view('posts.show',compact('post')); // ['contact' => $contact]
+        return view('posts.show', compact('post')); // ['contact' => $contact]
     }
 
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('posts.edit', compact('post','categories'));
     }
 
-    public function update(PostUpdateRequest $request, Post $post)
+    public function update(Request $request, $id)
     {
-        $post->update($request->validated());
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $post = Post::find($id);
+
+        if($request->hasFile('image')){
+            $request->validate([
+              'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            ]);
+            $path = $request->file('image')->store('/uploads/images');
+            $post->image = $path;
+        }
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->save();
+
+        //$post->update($request->validated());
 
         return to_route('posts.index')->with('message', 'Post updated.');
     }
@@ -114,9 +137,7 @@ class PostController extends Controller
         }
         Post::create($input);
 
-        return to_route('posts.index')->with('message','Post created successfully.');
-
-
+        return to_route('posts.index')->with('message', 'Post created successfully.');
     }
 
     public function todaysCount(): int

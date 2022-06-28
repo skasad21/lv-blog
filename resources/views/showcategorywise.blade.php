@@ -50,20 +50,19 @@
         </div>
     </div>
 
-
     <div class="container mx-auto px-6 py-10 bg-gray-100 my-10 text-gray-600 rounded-md shadow-md">
 
         <div class="grid grid-cols-4 gap-4">
             <div class="col-span-3">
 
-                @foreach ($posts as $post)
+                @foreach ($postCategoryWises as $postCategoryWise)
                     <div class="mb-10">
-                        <img src="/uploads/{{ $post->image }}" alt="Post header image" class="rounded-lg my-4" />
-                        <h1>{{ $post->title }}</h1>
+                        <img src="/uploads/{{ $postCategoryWise->image }}" alt="Post header image" class="rounded-lg my-4" />
+                        <h1>{{ $postCategoryWise->title }}</h1>
                         <p class="text-justify">
-                            {{ Str::limit($post->body, 300) }}
-                            @if (strlen(strip_tags($post->body)) > 300)
-                                <a href="{{ route('show', $post) }}" class="btn btn-info btn-sm font-bold text-blue-600">Read More</a>
+                            {{ Str::limit($postCategoryWise->body, 300) }}
+                            @if (strlen(strip_tags($postCategoryWise->body)) > 300)
+                                <a href="{{ route('show', $postCategoryWise) }}" class="btn btn-info btn-sm font-bold text-blue-600">Read More</a>
                             @endif
 
                         </p>
@@ -72,7 +71,7 @@
 
 
 
-                {{ $posts->withQueryString()->links() }}
+                {{-- {{ $postCategoryWises->withQueryString()->links() }} --}}
 
                 {{-- <div class="mb-10">
                     <img src="https://picsum.photos/1000/420" alt="Post header image" class="rounded-lg my-4" />
@@ -123,3 +122,4 @@
 </body>
 
 </html>
+

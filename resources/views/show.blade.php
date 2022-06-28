@@ -93,7 +93,7 @@
                 <ul>
                     @foreach ($last_posts as $last_post)
                         <li class="py-2"><a class="px-1 py-2 bg-purple-300"
-                                href="#">{{ $last_post->title }}</a></li>
+                                href="{{ route('show', $last_post->id) }}">{{ $last_post->title }}</a></li>
                     @endforeach
 
                 </ul>

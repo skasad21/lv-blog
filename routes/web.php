@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\PermissionController;
 
 Route::get('/', [IndexController::class,'index']);
 Route::get('/post/{post}', [IndexController::class,'show'])->name('show');
+Route::get('/category/{category}', [IndexController::class,'showcategorywise'])->name('showcategorywise');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
