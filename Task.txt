@@ -1,0 +1,6 @@
+Develop a Blog Site (3 type of user) - Admin, Premium User, General User(Per day single post).
+20.06.2022 :
+1. Admin:
+1.1 CRUD [Post]: own and Others user post.
+1.2 Manage User
+2. CRUD POST

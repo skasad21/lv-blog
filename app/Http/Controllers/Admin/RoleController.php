@@ -53,4 +53,6 @@ class RoleController extends Controller
         $role->permissions()->sync($request->permissions);
         return back()->with('message', 'Permissions added.');
     }
+
+
 }

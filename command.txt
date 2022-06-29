@@ -30,6 +30,9 @@ Make role then permission the permission_role table then user table.
 28. php artisan make:import UsersImport --model=User
 29. php artisan make:migration create_category_post_table
 30. php artisan make:migration add_category_id_to_posts_table --table=posts
+30. php artisan make:model DailyPostLimit -m
+31. php artisan migrate:rollback --step=1
+32. php artisan make:controller Admin/DailyPostLimitController
 
 
 

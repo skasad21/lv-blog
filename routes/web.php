@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DailyPostLimitController;
 use App\Http\Controllers\Admin\PermissionController;
 
 /*
@@ -47,6 +48,16 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::resource('/permissions', PermissionController::class);
     Route::resource('/users', UserController::class);
     //Route::get('/categories', [CategoryController::class,'index'])->name('categories.index');
+
+    // Route::get('ajax-book-crud', [DailyPostLimitController::class, 'index']);
+    // Route::post('add-update-book', [DailyPostLimitController::class, 'store']);
+    // Route::post('edit-book', [DailyPostLimitController::class, 'edit']);
+    // Route::post('delete-book', [DailyPostLimitController::class, 'destroy']);
+
+
+    // Route::get('/dailypostlimits', [DailyPostLimitController::class, 'index'])->name('dailypostlimits.index');
+    Route::resource('/dailypostlimits', DailyPostLimitController::class);
+
     Route::resource('/categories', CategoryController::class);
 
     //Excel FIle Upload

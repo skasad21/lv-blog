@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\DailyPostLimit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostUpdateRequest;
@@ -20,19 +21,29 @@ class PostController extends Controller
     public function index()
     {
         $roleID = Auth::user()->role_id;
+        $dailyPostLimit = new DailyPostLimit;
         $postCount = 0;
         if ($roleID == 1) {
             $posts = Post::paginate(5);
             $postCount = Post::all()->count();
+            $dailyLimit = $dailyPostLimit->dailyPostPermission($roleID);
+        }
+        if ($roleID == 2) {
+            // $posts = Post::whereUserId(Auth::id())->get()->paginate(5);
+            $posts = Post::where('user_id', Auth::id())->paginate(5);
+            $postCount = Post::where('user_id', Auth::id())->whereDate('created_at', '=', Carbon::today()->toDateString())->count();
+            $dailyLimit = $dailyPostLimit->dailyPostPermission($roleID);
         }
         if ($roleID == 3) {
             // $posts = Post::whereUserId(Auth::id())->get()->paginate(5);
             $posts = Post::where('user_id', Auth::id())->paginate(5);
             $postCount = Post::where('user_id', Auth::id())->whereDate('created_at', '=', Carbon::today()->toDateString())->count();
+            $dailyLimit = $dailyPostLimit->dailyPostPermission($roleID);
         }
 
 
-        return view('posts.index', compact('posts', 'postCount', 'roleID'));
+
+        return view('posts.index', compact('posts', 'postCount', 'roleID','dailyLimit'));
     }
 
     public function getCategoryName($id): string

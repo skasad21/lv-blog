@@ -45,6 +45,10 @@
                 {{ __('Users') }}
             </x-sidebar-link>
 
+            <x-sidebar-link :href="route('admin.dailypostlimits.index')" :active="request()->routeIs('admin.dailypostlimits.index')">
+                {{ __('Post Limit') }}
+            </x-sidebar-link>
+
             <x-sidebar-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
                 {{ __('Categories') }}
             </x-sidebar-link>

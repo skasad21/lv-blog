@@ -12,15 +12,21 @@ use App\Http\Controllers\PostController;
                         New Post</a>
                 </div>
             @endif
-
-            @if ($postCount < 1 && $roleID == 3)
+            @if ((($dailyLimit-$postCount) > 0) && $roleID == 2)
                 <div class="flex justify-end m-2 p-2">
                     <a href="{{ route('posts.create') }}" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-600 rounded">
                         New Post</a>
                 </div>
             @endif
 
-            <p class="joined-text">Today's Posts: {{ $postCount }}</p>
+            @if ((($dailyLimit-$postCount) > 0) && $roleID == 3)
+                <div class="flex justify-end m-2 p-2">
+                    <a href="{{ route('posts.create') }}" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-600 rounded">
+                        New Post</a>
+                </div>
+            @endif
+
+            <p class="joined-text">Number of post you can add Today: {{ ($roleID == 1) ? "Unlimited Post" : ($dailyLimit-$postCount)  }}</p>
             <p class="joined-text">User Role: {{ $roleID }}</p>
         @endcan
         <div class="relative overflow-x-auto shadow-md bg-gray-200 sm:rounded-lg">
