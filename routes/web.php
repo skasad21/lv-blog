@@ -33,7 +33,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'role:admin'])->name('dashboard');
 
-Route::resource('/posts', PostController::class);
+Route::resource('/posts', PostController::class)->middleware('auth');
+//Change PassWord
+
 
 
 // Route::get('/dashboard', function () {
@@ -51,6 +53,8 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
 
 
 
+
+
     // Route::get('/dailypostlimits', [DailyPostLimitController::class, 'index'])->name('dailypostlimits.index');
     Route::resource('/dailypostlimits', DailyPostLimitController::class);
 
@@ -59,7 +63,6 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::get('fetch-role', [DailyPostLimitController::class, 'roles']);
     Route::post('dailypostlimits',[DailyPostLimitController::class,'store']);
     Route::get('edit-dailypostlimits/{id}', [DailyPostLimitController::class, 'edit']);
-
     Route::put('update-dailypostlimits/{id}', [DailyPostLimitController::class, 'update']);
     Route::delete('delete-dailypostlimits/{id}', [DailyPostLimitController::class, 'destroy']);
 

@@ -33,6 +33,7 @@ Make role then permission the permission_role table then user table.
 30. php artisan make:model DailyPostLimit -m
 31. php artisan migrate:rollback --step=1
 32. php artisan make:controller Admin/DailyPostLimitController
+33. php artisan make:controller Auth/ForgotPasswordController
 
 
 

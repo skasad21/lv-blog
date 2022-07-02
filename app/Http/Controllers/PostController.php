@@ -23,6 +23,8 @@ class PostController extends Controller
         $roleID = Auth::user()->role_id;
         $dailyPostLimit = new DailyPostLimit;
         $postCount = 0;
+
+
         if ($roleID == 1) {
             $posts = Post::paginate(5);
             $postCount = Post::all()->count();
