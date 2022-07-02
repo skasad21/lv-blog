@@ -49,14 +49,21 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::resource('/users', UserController::class);
     //Route::get('/categories', [CategoryController::class,'index'])->name('categories.index');
 
-    // Route::get('ajax-book-crud', [DailyPostLimitController::class, 'index']);
-    // Route::post('add-update-book', [DailyPostLimitController::class, 'store']);
-    // Route::post('edit-book', [DailyPostLimitController::class, 'edit']);
-    // Route::post('delete-book', [DailyPostLimitController::class, 'destroy']);
 
 
     // Route::get('/dailypostlimits', [DailyPostLimitController::class, 'index'])->name('dailypostlimits.index');
     Route::resource('/dailypostlimits', DailyPostLimitController::class);
+
+    // Experiment
+    Route::get('fetch-dailypostlimit', [DailyPostLimitController::class, 'fetchDailyPost']);
+    Route::get('fetch-role', [DailyPostLimitController::class, 'roles']);
+    Route::post('dailypostlimits',[DailyPostLimitController::class,'store']);
+    Route::get('edit-dailypostlimits/{id}', [DailyPostLimitController::class, 'edit']);
+
+    Route::put('update-dailypostlimits/{id}', [DailyPostLimitController::class, 'update']);
+    Route::delete('delete-dailypostlimits/{id}', [DailyPostLimitController::class, 'destroy']);
+
+    //
 
     Route::resource('/categories', CategoryController::class);
 
